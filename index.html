@@ -31,10 +31,6 @@
             font-size: 18px;
             margin-top: 10px;
         }
-        #icon-container {
-            margin-top: 20px;
-            font-size: 50px;
-        }
     </style>
 </head>
 <body>
@@ -42,7 +38,6 @@
     <button type="button" onclick="init()">Iniciar Clasificación</button>
     <div id="webcam-container"></div>
     <div id="label-container"></div>
-    <div id="icon-container"></div>
 
     <script>
         const URL = "https://teachablemachine.withgoogle.com/models/U5TB4RFCO/"; // Asegúrate de reemplazar con la URL correcta de tu modelo
@@ -76,23 +71,11 @@
 
         async function predict() {
             const prediction = await model.predict(webcam.canvas);
-            let iconContainer = document.getElementById("icon-container");
-            iconContainer.innerHTML = "";
-
             for (let i = 0; i < maxPredictions; i++) {
                 const classPrediction = `${prediction[i].className}: ${prediction[i].probability.toFixed(2)}`;
                 labelContainer.childNodes[i].innerHTML = classPrediction;
-
-                if (prediction[i].probability > 0.5) {
-                    if (prediction[i].className.toLowerCase().includes("gafas")) {
-                        iconContainer.innerHTML = "👓"; // Icono de gafas
-                    } else {
-                        iconContainer.innerHTML = "🚫👓"; // Icono de gafas tachadas
-                    }
-                }
             }
         }
     </script>
 </body>
 </html>
-
