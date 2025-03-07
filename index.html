@@ -31,21 +31,32 @@
             font-size: 18px;
             margin-top: 10px;
         }
+        input {
+            margin: 10px;
+            padding: 5px;
+            width: 300px;
+        }
     </style>
 </head>
 <body>
     <h1>Teachable Machine - Clasificación de Imágenes</h1>
+    <input type="text" id="model-url" placeholder="Ingrese la URL del modelo" value="https://teachablemachine.withgoogle.com/models/U5TB4RFCO/">
     <button type="button" onclick="init()">Iniciar Clasificación</button>
     <div id="webcam-container"></div>
     <div id="label-container"></div>
 
     <script>
-        const URL = "https://teachablemachine.withgoogle.com/models/U5TB4RFCO/"; // Asegúrate de reemplazar con la URL correcta de tu modelo
         let model, webcam, labelContainer, maxPredictions;
 
         async function init() {
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
+            let userURL = document.getElementById("model-url").value.trim();
+            if (!userURL) {
+                userURL = "https://teachablemachine.withgoogle.com/models/U5TB4RFCO/";
+            }
+            
+            const modelURL = userURL + "/model.json";
+            const metadataURL = userURL + "/metadata.json";
+            
             model = await tmImage.load(modelURL, metadataURL);
             maxPredictions = model.getTotalClasses();
 
