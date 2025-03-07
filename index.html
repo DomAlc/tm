@@ -54,8 +54,8 @@
                 userURL = "https://teachablemachine.withgoogle.com/models/U5TB4RFCO/";
             }
             
-            const modelURL = userURL + "/model.json";
-            const metadataURL = userURL + "/metadata.json";
+            const modelURL = userURL + "model.json";
+            const metadataURL = userURL + "metadata.json";
             
             model = await tmImage.load(modelURL, metadataURL);
             maxPredictions = model.getTotalClasses();
